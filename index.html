@@ -3,11 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aanand AB — Developer &amp; Agency</title>
-<meta name="description" content="Aanand AB — Full-stack developer from Kerala building fast, memorable websites and custom software for clients who refuse to settle for ordinary.">
+<title>Aanand AB — Full-Stack Developer & Agency | Kerala, India</title>
+<meta name="description" content="Full-stack developer from Kerala building fast, memorable websites and custom software. Available for freelance — Next.js, React, Python, and more.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Aanand AB — Developer & Agency">
+<meta property="og:description" content="Full-stack developer from Kerala. Websites, web apps, and custom software built with craft and speed.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://aanandab.github.io/Freelance/">
+<meta property="og:site_name" content="Aanand AB">
+<meta property="og:locale" content="en_IN">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aanand AB — Developer & Agency">
+<meta name="twitter:description" content="Full-stack developer from Kerala. Available for freelance — websites, web apps, custom software.">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://aanandab.github.io/Freelance/">
+
+<!-- Favicon (AB logo in acid green) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230D0D0B'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='700' font-size='16' fill='%23CAFF00'>AB</text></svg>">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap&display=swap" rel="stylesheet">
 
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
@@ -32,6 +52,30 @@ body{
   cursor:none;
 }
 
+/* ── SCROLL PROGRESS BAR ── */
+#scroll-progress{
+  position:fixed;top:0;left:0;height:2px;
+  background:var(--acid);z-index:9998;
+  width:0%;transition:width .1s linear;
+  box-shadow:0 0 6px rgba(202,255,0,.4);
+}
+
+/* ── BACK TO TOP ── */
+#back-to-top{
+  position:fixed;bottom:24px;right:24px;z-index:9997;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--acid);color:var(--ink);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;font-weight:700;
+  opacity:0;transform:translateY(12px);
+  pointer-events:none;
+  transition:opacity .3s,transform .3s;
+  box-shadow:0 4px 16px rgba(202,255,0,.2);
+}
+#back-to-top.visible{opacity:1;transform:translateY(0);pointer-events:all;}
+#back-to-top:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(202,255,0,.35);}
+
 /* ── CURSOR ── */
 #cur{
   position:fixed;width:10px;height:10px;
@@ -42,14 +86,18 @@ body{
   mix-blend-mode:difference;
 }
 #cur.grow{width:56px;height:56px;border-radius:4px;}
-@media(hover:none){#cur{display:none;}body{cursor:auto;}}
 
-/* ── NOISE OVERLAY ── */
-body::before{
-  content:'';
-  position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:0;opacity:.45;
+/* ── NOISE OVERLAY (animated grain) ── */
+#noise-overlay{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+  opacity:.4;
+  animation:grain-drift 8s steps(3) infinite;
+}
+@keyframes grain-drift{
+  0%,100%{background-position:0 0;}
+  33%{background-position:3px 1px;}
+  66%{background-position:1px 3px;}
 }
 
 /* ══ NAVIGATION ══ */
@@ -62,11 +110,14 @@ nav{
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
 }
+nav[aria-label="Main navigation"]{}
 .nav-id{
   font-family:'DM Mono',monospace;font-size:.7rem;font-weight:400;
   letter-spacing:.12em;color:var(--muted);text-transform:uppercase;
   text-decoration:none;
+  outline-offset:4px;
 }
+.nav-id:focus-visible{outline:2px solid var(--acid);border-radius:2px;}
 .nav-id span{color:var(--acid);}
 .nav-center{
   font-family:'DM Mono',monospace;font-size:.65rem;
@@ -79,7 +130,9 @@ nav{
   text-decoration:none;
   transition:all .25s;
   position:relative;overflow:hidden;
+  outline-offset:4px;
 }
+.nav-hire:focus-visible{outline:2px solid var(--acid);border-radius:2px;}
 .nav-hire::before{
   content:'';position:absolute;inset:0;background:var(--acid);
   transform:translateY(101%);transition:transform .25s cubic-bezier(.76,0,.24,1);
@@ -149,7 +202,7 @@ nav{
   color:var(--acid);margin-bottom:1.5rem;
 }
 
-/* THE TYPESET HEADLINE */
+/* CHARACTER-LEVEL HERO */
 .hero-hed{
   font-family:'Space Grotesk',sans-serif;
   font-size:clamp(2.8rem,6.5vw,6rem);
@@ -158,8 +211,18 @@ nav{
   letter-spacing:-.03em;
   margin-bottom:2rem;
 }
-.hero-hed .word{display:inline-block;overflow:hidden;margin-right:.15em;}
-.hero-hed .word .inner{display:inline-block;transform:translateY(110%);opacity:0;}
+.hero-hed .word{display:inline-block;margin-right:.15em;white-space:nowrap;}
+.hero-hed .word .char{
+  display:inline-block;
+  transform:translateY(120%);
+  opacity:0;
+  will-change:transform,opacity;
+}
+.hero-hed .word .char.in{
+  transition:transform .7s cubic-bezier(.18,.89,.32,1.28), opacity .4s ease;
+  transform:translateY(0);
+  opacity:1;
+}
 .hero-hed .accent{color:var(--acid);}
 
 .hero-standfirst{
@@ -181,7 +244,9 @@ nav{
   text-decoration:none;font-weight:500;
   position:relative;overflow:hidden;
   transition:color .3s;
+  outline-offset:4px;
 }
+.btn-press:focus-visible{outline:2px solid var(--acid);border-radius:2px;}
 .btn-press.filled{
   background:var(--acid);color:var(--ink);border:1px solid var(--acid);
 }
@@ -191,7 +256,6 @@ nav{
 }
 .btn-press.outline:hover{border-color:var(--paper);}
 
-/* bottom hero strip */
 .hero-strip{
   display:flex;justify-content:space-between;align-items:center;
   flex-wrap:wrap;gap:1rem;
@@ -240,7 +304,7 @@ nav{
   content:'◆';font-size:.45rem;opacity:.5;
 }
 
-/* ══ ABOUT / EDITORIAL SPREAD ══ */
+/* ══ ABOUT ══ */
 #about{
   display:grid;
   grid-template-columns:200px 1fr 1fr;
@@ -396,7 +460,7 @@ nav{
 }
 .service-card:hover .service-expand{color:var(--acid);transform:translate(3px,-3px);}
 
-/* ══ WORK ══ */
+/* ══ WORK — MAGNETIC HOVER ══ */
 #work{border-bottom:1px solid var(--rule-light);}
 .work-header{
   padding:3rem 2.5vw 2rem;
@@ -412,6 +476,11 @@ nav{
   position:relative;overflow:hidden;
   text-decoration:none;color:var(--paper);
   transition:background .4s;
+  will-change:transform;
+}
+.project-row:focus-visible{
+  outline:2px solid var(--acid);outline-offset:-2px;
+  background:var(--ink2);
 }
 .project-row:hover{background:var(--ink2);}
 .project-row:last-child{border-bottom:none;}
@@ -555,6 +624,9 @@ nav{
   text-decoration:none;color:var(--paper);
   transition:padding-left .3s;
 }
+.ci-row:focus-visible{
+  outline:2px solid var(--acid);outline-offset:2px;border-radius:2px;
+}
 .ci-row:hover{padding-left:.75rem;}
 .ci-label{
   font-family:'DM Mono',monospace;font-size:.6rem;
@@ -596,6 +668,9 @@ nav{
 .field-input:focus,.field-select:focus,.field-textarea:focus{
   border-color:var(--acid);
 }
+.field-input:focus-visible,.field-select:focus-visible,.field-textarea:focus-visible{
+  outline:2px solid var(--acid);outline-offset:2px;border-radius:2px;
+}
 .field-textarea{height:100px;font-family:'Space Grotesk',sans-serif;}
 .field-select{cursor:pointer;background:transparent;}
 .field-select option{background:var(--ink2);color:var(--paper);}
@@ -612,6 +687,7 @@ nav{
   transition:all .3s;
   position:relative;overflow:hidden;
 }
+.send-btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:2px;}
 .send-btn::before{
   content:'';position:absolute;inset:0;background:var(--ink);
   transform:translateX(-101%);transition:transform .3s cubic-bezier(.76,0,.24,1);
@@ -643,7 +719,9 @@ footer{
   letter-spacing:.1em;text-transform:uppercase;
   color:var(--muted);text-decoration:none;
   transition:color .25s;
+  outline-offset:4px;
 }
+.footer-links a:focus-visible{outline:2px solid var(--acid);border-radius:2px;}
 .footer-links a:hover{color:var(--acid);}
 
 /* ── REVEAL SYSTEM ── */
@@ -652,6 +730,21 @@ footer{
 .r.in{opacity:1;transform:none;}
 .r.d1{transition-delay:.1s;} .r.d2{transition-delay:.2s;}
 .r.d3{transition-delay:.3s;} .r.d4{transition-delay:.4s;}
+
+/* ── REDUCED MOTION ── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+  html{scroll-behavior:auto;}
+  .hero-hed .word .char{transform:none;opacity:1;}
+  .r{opacity:1;transform:none;transition:none;}
+  #noise-overlay{animation:none;}
+  .marquee-track{animation:none;}
+  .scroll-ticker::after{animation:none;}
+}
 
 /* ── MOBILE ── */
 @media(max-width:900px){
@@ -671,45 +764,62 @@ footer{
   .proj-body{grid-template-columns:1fr;}
   .proj-meta{border-top:1px solid var(--rule-light);}
   nav .nav-center{display:none;}
+  #back-to-top{bottom:16px;right:16px;width:36px;height:36px;font-size:1rem;}
+}
+@media(hover:none){
+  #cur{display:none;}body{cursor:auto;}
 }
 </style>
 </head>
 <body>
 
-<div id="cur"></div>
+<!-- SCROLL PROGRESS -->
+<div id="scroll-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Page scroll progress"></div>
+
+<!-- NOISE OVERLAY -->
+<div id="noise-overlay" aria-hidden="true"></div>
+
+<!-- CURSOR -->
+<div id="cur" aria-hidden="true"></div>
+
+<!-- BACK TO TOP -->
+<button id="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
 
 <!-- NAV -->
-<nav>
+<header>
+<nav aria-label="Main navigation">
   <a href="#" class="nav-id"><span>◈</span> Aanand AB</a>
   <span class="nav-center">Developer &amp; Digital Craftsman — Kerala, IN</span>
   <a href="#contact" class="nav-hire"><span>Available for hire →</span></a>
 </nav>
+</header>
 
+<main>
 <!-- HERO -->
-<section id="hero">
+<section id="hero" aria-label="Hero">
   <div class="hero-top">
     <div class="hero-meta">
       <div class="issue-tag">
-        <span class="dot"></span>
+        <span class="dot" aria-hidden="true"></span>
         Vol. I — 2026 — Agency
       </div>
-      <div class="hero-index">AB</div>
+      <div class="hero-index" aria-hidden="true">AB</div>
     </div>
     <div class="hero-right">
       <div class="hero-kicker">// Full-Stack Developer &amp; Software Engineer</div>
       <h1 class="hero-hed" id="hero-hed">
-        <span class="word"><span class="inner">The</span></span>
-        <span class="word"><span class="inner">web</span></span>
-        <span class="word"><span class="inner">is</span></span>
-        <span class="word accent"><span class="inner">a</span></span>
+        <span class="word">The</span>
+        <span class="word">web</span>
+        <span class="word">is</span>
+        <span class="word accent">a</span>
         <br>
-        <span class="word"><span class="inner">blank</span></span>
-        <span class="word accent"><span class="inner">canvas.</span></span>
+        <span class="word">blank</span>
+        <span class="word accent">canvas.</span>
         <br>
-        <span class="word"><span class="inner">I</span></span>
-        <span class="word"><span class="inner">fill</span></span>
-        <span class="word"><span class="inner">it</span></span>
-        <span class="word accent"><span class="inner">well.</span></span>
+        <span class="word">I</span>
+        <span class="word">fill</span>
+        <span class="word">it</span>
+        <span class="word accent">well.</span>
       </h1>
       <p class="hero-standfirst">
         Building fast, memorable websites and custom software for clients who refuse to settle for ordinary. Based in Kerala — working globally.
@@ -725,7 +835,7 @@ footer{
     <span class="hero-location">◈ Tellicherry, Kerala, India — UTC+5:30</span>
     <span class="hero-scroll-cue">
       Scroll to explore
-      <span class="scroll-ticker"></span>
+      <span class="scroll-ticker" aria-hidden="true"></span>
     </span>
   </div>
 </section>
@@ -736,8 +846,8 @@ footer{
 </div>
 
 <!-- ABOUT -->
-<section id="about">
-  <div class="about-sidebar">
+<section id="about" aria-label="About Aanand">
+  <div class="about-sidebar" aria-hidden="true">
     <span class="sidebar-label">Profile — Aanand AB</span>
     <div class="sidebar-index">AB</div>
   </div>
@@ -761,7 +871,6 @@ footer{
 
   <div class="about-stats-col">
     <div class="section-flag r">By the numbers</div>
-
     <div class="stat-block r d1">
       <div class="stat-num" data-count="30">0</div>
       <div class="stat-desc">Projects shipped</div>
@@ -807,7 +916,7 @@ footer{
 </section>
 
 <!-- SERVICES -->
-<section id="services">
+<section id="services" aria-label="Services">
   <div class="services-header">
     <div>
       <div class="section-flag r">Services</div>
@@ -823,54 +932,43 @@ footer{
       <h3 class="service-card-title">Website<br><span class="line2">Development</span></h3>
       <p class="service-desc">Animated, high-performance sites that load instantly and convert visitors. Business sites, portfolios, landing pages — every scroll and transition is deliberate.</p>
       <div class="service-stack">
-        <span class="stack-chip">React</span>
-        <span class="stack-chip">Next.js</span>
-        <span class="stack-chip">GSAP</span>
-        <span class="stack-chip">Framer</span>
-        <span class="stack-chip">Tailwind</span>
+        <span class="stack-chip">React</span><span class="stack-chip">Next.js</span><span class="stack-chip">GSAP</span><span class="stack-chip">Framer</span><span class="stack-chip">Tailwind</span>
       </div>
-      <span class="service-expand">↗</span>
+      <span class="service-expand" aria-hidden="true">↗</span>
     </div>
     <div class="service-card r d1">
       <div class="service-num">02 — Software</div>
       <h3 class="service-card-title">Software<br><span class="line2">Engineering</span></h3>
       <p class="service-desc">Custom desktop applications, automation tools, and backend systems built to solve real problems. Python, Flutter, Electron — whatever the job demands.</p>
       <div class="service-stack">
-        <span class="stack-chip">Python</span>
-        <span class="stack-chip">Flutter</span>
-        <span class="stack-chip">Node.js</span>
-        <span class="stack-chip">SQLite</span>
+        <span class="stack-chip">Python</span><span class="stack-chip">Flutter</span><span class="stack-chip">Node.js</span><span class="stack-chip">SQLite</span>
       </div>
-      <span class="service-expand">↗</span>
+      <span class="service-expand" aria-hidden="true">↗</span>
     </div>
     <div class="service-card r d2">
       <div class="service-num">03 — Full-stack</div>
       <h3 class="service-card-title">CMS &amp;<br><span class="line2">Web Apps</span></h3>
       <p class="service-desc">End-to-end applications with content management, auth, and databases. Headless CMS setups so your team can update content without touching code.</p>
       <div class="service-stack">
-        <span class="stack-chip">Ghost CMS</span>
-        <span class="stack-chip">REST APIs</span>
-        <span class="stack-chip">PostgreSQL</span>
-        <span class="stack-chip">Vite</span>
+        <span class="stack-chip">Ghost CMS</span><span class="stack-chip">REST APIs</span><span class="stack-chip">PostgreSQL</span><span class="stack-chip">Vite</span>
       </div>
-      <span class="service-expand">↗</span>
+      <span class="service-expand" aria-hidden="true">↗</span>
     </div>
   </div>
 </section>
 
-<!-- WORK — REAL PROJECTS -->
-<section id="work">
+<!-- WORK — REAL PROJECTS WITH MAGNETIC HOVER -->
+<section id="work" aria-label="Selected projects">
   <div class="work-header">
     <div>
       <div class="section-flag r">Selected Work</div>
       <h2 class="big-initial r d1" style="font-size:clamp(2rem,5vw,3.5rem);margin-bottom:0;">Projects that<br>do the talking.</h2>
     </div>
-    <a href="https://github.com/AanandAB" target="_blank" class="btn-press outline r">All on GitHub ↗</a>
+    <a href="https://github.com/AanandAB" target="_blank" rel="noopener" class="btn-press outline r">All on GitHub ↗</a>
   </div>
 
-  <!-- PROJECT 01 — Destino Travels -->
-  <a class="project-row r" href="https://github.com/AanandAB/Destino-Travels" target="_blank">
-    <div class="proj-num">01</div>
+  <a class="project-row r magnetic" href="https://github.com/AanandAB/Destino-Travels" target="_blank" rel="noopener">
+    <div class="proj-num" aria-hidden="true">01</div>
     <div class="proj-body">
       <div class="proj-content">
         <div class="proj-type">// Business Website</div>
@@ -886,16 +984,15 @@ footer{
           <div class="proj-tech-item">Tailwind CSS</div>
         </div>
         <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle">↗</div>
+          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
           View project
         </div>
       </div>
     </div>
   </a>
 
-  <!-- PROJECT 02 — Bitnexel POS -->
-  <a class="project-row r" href="https://github.com/AanandAB/Bitnexel" target="_blank">
-    <div class="proj-num">02</div>
+  <a class="project-row r magnetic" href="https://github.com/AanandAB/Bitnexel" target="_blank" rel="noopener">
+    <div class="proj-num" aria-hidden="true">02</div>
     <div class="proj-body">
       <div class="proj-content">
         <div class="proj-type">// SaaS Web Application</div>
@@ -911,16 +1008,15 @@ footer{
           <div class="proj-tech-item">React Hook Form</div>
         </div>
         <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle">↗</div>
+          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
           View project
         </div>
       </div>
     </div>
   </a>
 
-  <!-- PROJECT 03 — FIFA 2026 -->
-  <a class="project-row r" href="https://github.com/AanandAB/Fifa" target="_blank">
-    <div class="proj-num">03</div>
+  <a class="project-row r magnetic" href="https://github.com/AanandAB/Fifa" target="_blank" rel="noopener">
+    <div class="proj-num" aria-hidden="true">03</div>
     <div class="proj-body">
       <div class="proj-content">
         <div class="proj-type">// Sports Data Platform</div>
@@ -935,16 +1031,15 @@ footer{
           <div class="proj-tech-item">Live Data</div>
         </div>
         <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle">↗</div>
+          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
           View project
         </div>
       </div>
     </div>
   </a>
 
-  <!-- PROJECT 04 — 3D Portfolio -->
-  <a class="project-row r" href="https://aanandab.github.io/Portfolio/" target="_blank">
-    <div class="proj-num">04</div>
+  <a class="project-row r magnetic" href="https://aanandab.github.io/Portfolio/" target="_blank" rel="noopener">
+    <div class="proj-num" aria-hidden="true">04</div>
     <div class="proj-body">
       <div class="proj-content">
         <div class="proj-type">// Creative Portfolio</div>
@@ -960,16 +1055,15 @@ footer{
           <div class="proj-tech-item">Sketchfab</div>
         </div>
         <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle">↗</div>
+          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
           View live site
         </div>
       </div>
     </div>
   </a>
 
-  <!-- PROJECT 05 — Evently Connect -->
-  <a class="project-row r" href="https://github.com/AanandAB/evently-connect-portal" target="_blank">
-    <div class="proj-num">05</div>
+  <a class="project-row r magnetic" href="https://github.com/AanandAB/evently-connect-portal" target="_blank" rel="noopener">
+    <div class="proj-num" aria-hidden="true">05</div>
     <div class="proj-body">
       <div class="proj-content">
         <div class="proj-type">// Business Website</div>
@@ -984,7 +1078,7 @@ footer{
           <div class="proj-tech-item">Vite</div>
         </div>
         <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle">↗</div>
+          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
           View project
         </div>
       </div>
@@ -993,35 +1087,35 @@ footer{
 </section>
 
 <!-- PROCESS -->
-<section id="process">
+<section id="process" aria-label="Work process">
   <div class="process-col r">
     <div class="proc-flag">// How I work</div>
-    <div class="proc-num">01</div>
+    <div class="proc-num" aria-hidden="true">01</div>
     <h3 class="proc-title">Discover</h3>
     <p class="proc-desc">I learn your business, your users, and what success actually looks like. No guessing. No assumptions.</p>
   </div>
   <div class="process-col r d1">
     <div class="proc-flag">// Phase two</div>
-    <div class="proc-num">02</div>
+    <div class="proc-num" aria-hidden="true">02</div>
     <h3 class="proc-title">Design</h3>
     <p class="proc-desc">From wireframes to hi-fi. You see and approve every decision before any code is committed.</p>
   </div>
   <div class="process-col r d2">
     <div class="proc-flag">// Phase three</div>
-    <div class="proc-num">03</div>
+    <div class="proc-num" aria-hidden="true">03</div>
     <h3 class="proc-title">Build</h3>
     <p class="proc-desc">Clean, documented, testable code. Weekly check-ins. You're in the loop at every milestone.</p>
   </div>
   <div class="process-col r d3">
     <div class="proc-flag">// Delivery</div>
-    <div class="proc-num">04</div>
+    <div class="proc-num" aria-hidden="true">04</div>
     <h3 class="proc-title">Launch</h3>
     <p class="proc-desc">Deployed, optimised, and tested. Post-launch support included. I don't disappear after handoff.</p>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" aria-label="Contact">
   <div class="contact-left">
     <div>
       <div class="section-flag r">Get in touch</div>
@@ -1038,22 +1132,22 @@ footer{
       <a href="mailto:aanandab44@gmail.com" class="ci-row">
         <span class="ci-label">Email</span>
         <span class="ci-val">aanandab44@gmail.com</span>
-        <span class="ci-arrow">↗</span>
+        <span class="ci-arrow" aria-hidden="true">↗</span>
       </a>
-      <a href="tel:+917034026295" class="ci-row">
+      <a href="tel:+917****6295" class="ci-row">
         <span class="ci-label">Phone</span>
         <span class="ci-val">+91 70340 26295</span>
-        <span class="ci-arrow">↗</span>
+        <span class="ci-arrow" aria-hidden="true">↗</span>
       </a>
-      <a href="https://github.com/AanandAB" target="_blank" class="ci-row">
+      <a href="https://github.com/AanandAB" target="_blank" rel="noopener" class="ci-row">
         <span class="ci-label">GitHub</span>
         <span class="ci-val">github.com/AanandAB</span>
-        <span class="ci-arrow">↗</span>
+        <span class="ci-arrow" aria-hidden="true">↗</span>
       </a>
-      <a href="https://www.linkedin.com/in/aanandab" target="_blank" class="ci-row">
+      <a href="https://www.linkedin.com/in/aanandab" target="_blank" rel="noopener" class="ci-row">
         <span class="ci-label">LinkedIn</span>
         <span class="ci-val">linkedin.com/in/aanandab</span>
-        <span class="ci-arrow">↗</span>
+        <span class="ci-arrow" aria-hidden="true">↗</span>
       </a>
     </div>
   </div>
@@ -1061,15 +1155,15 @@ footer{
   <div class="contact-right r d1" id="contact-form">
     <div class="form-head">Send a message</div>
     <div class="field-group">
-      <label class="field-label">Your name</label>
+      <label class="field-label" for="form-name">Your name</label>
       <input type="text" class="field-input" id="form-name" placeholder="Jane Smith">
     </div>
     <div class="field-group">
-      <label class="field-label">Email address</label>
+      <label class="field-label" for="form-email">Email address</label>
       <input type="email" class="field-input" id="form-email" placeholder="jane@company.com">
     </div>
     <div class="field-group">
-      <label class="field-label">I need a</label>
+      <label class="field-label" for="form-service">I need a</label>
       <select class="field-select" id="form-service">
         <option value="">— Select service —</option>
         <option>Website</option>
@@ -1080,7 +1174,7 @@ footer{
       </select>
     </div>
     <div class="field-group">
-      <label class="field-label">Tell me about it</label>
+      <label class="field-label" for="form-message">Tell me about it</label>
       <textarea class="field-textarea" id="form-message" placeholder="What are you building? Budget? Timeline? Any details help."></textarea>
     </div>
     <div class="form-send">
@@ -1089,13 +1183,14 @@ footer{
     </div>
   </div>
 </section>
+</main>
 
 <!-- FOOTER -->
 <footer>
   <span class="footer-sig">&copy; 2026 — <strong>Aanand AB</strong> — All rights reserved</span>
   <div class="footer-links">
-    <a href="https://github.com/AanandAB" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/aanandab" target="_blank">LinkedIn</a>
+    <a href="https://github.com/AanandAB" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/aanandab" target="_blank" rel="noopener">LinkedIn</a>
     <a href="mailto:aanandab44@gmail.com">Email</a>
   </div>
   <span class="footer-sig">Kerala, India <strong style="color:var(--acid)">◈</strong></span>
@@ -1113,32 +1208,46 @@ document.querySelectorAll('a,button,.service-card,.project-row').forEach(el => {
   el.addEventListener('mouseleave', () => cur.classList.remove('grow'));
 });
 
-// ── HERO WORD ANIMATION (typeset drop) ──
-window.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.hero-hed .word .inner').forEach((el, i) => {
-    setTimeout(() => {
-      el.style.transition = 'transform .65s cubic-bezier(.22,1,.36,1), opacity .5s ease';
-      el.style.transform = 'translateY(0)';
-      el.style.opacity = '1';
-    }, 400 + i * 80);
+// ── CHARACTER-LEVEL HERO ANIMATION (kinetic drop) ──
+(function initHero() {
+  const hed = document.getElementById('hero-hed');
+  if (!hed) return;
+  const words = hed.querySelectorAll('.word');
+  words.forEach(word => {
+    const isAccent = word.classList.contains('accent');
+    const text = word.textContent;
+    word.textContent = '';
+    [...text].forEach((char, ci) => {
+      const span = document.createElement('span');
+      span.className = 'char' + (isAccent ? ' accent' : '');
+      span.textContent = char;
+      word.appendChild(span);
+    });
   });
-});
+  // Animate after DOM settles
+  setTimeout(() => {
+    const chars = hed.querySelectorAll('.word .char');
+    chars.forEach((char, i) => {
+      setTimeout(() => char.classList.add('in'), 300 + i * 35);
+    });
+  }, 200);
+})();
 
 // ── MARQUEE BUILD ──
 const items = ['Website Development','Software Engineering','Full-Stack Apps','Clean Code','Fast Delivery','Kerala, India','Available Now','React & Next.js','Python','Node.js','Freelance Ready'];
 const track = document.getElementById('mtrack');
-let html = '';
-for(let r = 0; r < 3; r++) items.forEach(t => { html += `<span class="marquee-item">${t}</span>`; });
-track.innerHTML = html;
+let marqueeHTML = '';
+for(let r = 0; r < 3; r++) items.forEach(t => { marqueeHTML += `<span class="marquee-item">${t}</span>`; });
+track.innerHTML = marqueeHTML;
 
 // ── SCROLL REVEAL ──
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); observer.unobserve(e.target); }});
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); revealObserver.unobserve(e.target); }});
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.r').forEach(el => observer.observe(el));
+document.querySelectorAll('.r').forEach(el => revealObserver.observe(el));
 
 // ── COUNTER ANIMATION ──
-const cobs = new IntersectionObserver(entries => {
+const counterObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if(!e.isIntersecting) return;
     const el = e.target;
@@ -1151,23 +1260,23 @@ const cobs = new IntersectionObserver(entries => {
       el.textContent = Math.floor(start) + suffix;
       if(start >= target) clearInterval(t);
     }, 24);
-    cobs.unobserve(el);
+    counterObserver.unobserve(el);
   });
 }, { threshold: 0.5 });
-document.querySelectorAll('[data-count]').forEach(el => cobs.observe(el));
+document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
 
 // ── SKILL BARS ──
-const sobs = new IntersectionObserver(entries => {
+const skillObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if(!e.isIntersecting) return;
     e.target.querySelectorAll('.skill-bar').forEach(b => {
       b.style.width = b.dataset.w + '%';
     });
-    sobs.unobserve(e.target);
+    skillObserver.unobserve(e.target);
   });
 }, { threshold: 0.3 });
 const skillsList = document.querySelector('.skills-list');
-if(skillsList) sobs.observe(skillsList);
+if(skillsList) skillObserver.observe(skillsList);
 
 // ── FORM → WHATSAPP ──
 document.getElementById('send-btn').addEventListener('click', function() {
@@ -1190,13 +1299,50 @@ document.getElementById('send-btn').addEventListener('click', function() {
   }, 3500);
 });
 
-// ── SMOOTH SCROLL FOR NAV LINKS ──
+// ── SMOOTH SCROLL FOR ANCHOR LINKS ──
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
     if(!target) return;
     e.preventDefault();
     target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// ── SCROLL PROGRESS BAR ──
+const progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  progressBar.style.width = pct + '%';
+  progressBar.setAttribute('aria-valuenow', Math.round(pct));
+});
+
+// ── BACK TO TOP ──
+const backBtn = document.getElementById('back-to-top');
+window.addEventListener('scroll', () => {
+  backBtn.classList.toggle('visible', window.scrollY > window.innerHeight * 0.5);
+});
+backBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ── MAGNETIC HOVER ON PROJECT ROWS ──
+document.querySelectorAll('.project-row.magnetic').forEach(row => {
+  row.addEventListener('mousemove', e => {
+    const rect = row.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    // Subtle tilt — max 4px shift
+    const tx = x * 0.015;
+    const ty = y * 0.02;
+    row.style.transform = `translate(${tx}px, ${ty}px)`;
+    row.style.transition = 'transform .15s ease-out, background .4s';
+  });
+  row.addEventListener('mouseleave', () => {
+    row.style.transform = 'translate(0, 0)';
+    row.style.transition = 'transform .4s cubic-bezier(.23,1,.32,1), background .4s';
   });
 });
 </script>
