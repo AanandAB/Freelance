@@ -526,32 +526,40 @@ nav[aria-label="Main navigation"]{}
 }
 .service-card:hover .service-expand{color:var(--acid);transform:translate(3px,-3px);}
 
-/* ══ WORK — MAGNETIC HOVER ══ */
+/* ══ WORK — FULL PROJECT SECTIONS ══ */
 #work{border-bottom:1px solid var(--rule-light);}
 .work-header{
   padding:3rem 2.5vw 2rem;
   border-bottom:1px solid var(--rule-light);
   display:flex;justify-content:space-between;align-items:flex-end;
 }
-.project-row{
+
+/* Project index — jump nav */
+.work-nav{
+  display:flex;flex-wrap:wrap;gap:.5rem;
+  padding:1.1rem 2.5vw;
+  border-bottom:1px solid var(--rule-light);
+}
+.work-nav a{
+  font-family:'DM Mono',monospace;font-size:.65rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);text-decoration:none;
+  padding:.4rem .85rem;border:1px solid rgba(242,239,228,.12);
+  transition:all .25s;
+  outline-offset:3px;
+}
+.work-nav a:focus-visible{outline:2px solid var(--acid);border-radius:2px;}
+.work-nav a:hover{color:var(--ink);background:var(--acid);border-color:var(--acid);}
+
+/* Individual project section */
+.project-section{
   display:grid;
   grid-template-columns:80px 1fr;
   border-bottom:1px solid var(--rule-light);
-  min-height:200px;
-  cursor:pointer;
-  position:relative;overflow:hidden;
-  text-decoration:none;color:var(--paper);
-  transition:background .4s;
-  will-change:transform;
+  scroll-margin-top:80px;
 }
-.project-row:focus-visible{
-  outline:2px solid var(--acid);outline-offset:-2px;
-  background:var(--ink2);
-}
-.project-row:hover{background:var(--ink2);}
-.project-row:last-child{border-bottom:none;}
-
-.proj-num{
+.project-section:last-child{border-bottom:none;}
+.ps-num{
   border-right:1px solid var(--rule-light);
   display:flex;align-items:flex-start;justify-content:center;
   padding:2rem 0;
@@ -559,64 +567,87 @@ nav[aria-label="Main navigation"]{}
   color:var(--muted);letter-spacing:.1em;
   writing-mode:vertical-rl;text-orientation:mixed;
 }
-.proj-body{
-  display:grid;
-  grid-template-columns:1fr 280px;
-  gap:0;
+.ps-main{display:flex;flex-direction:column;}
+
+.ps-head{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:2rem;flex-wrap:wrap;
+  padding:2.5rem 3vw 1.5rem;
+  border-bottom:1px solid var(--rule-light);
 }
-.proj-content{
-  padding:2.5rem 3vw;
-  border-right:1px solid var(--rule-light);
-}
-.proj-type{
+.ps-head-title{flex:1;min-width:240px;}
+.ps-type{
   font-family:'DM Mono',monospace;font-size:.65rem;
   letter-spacing:.15em;text-transform:uppercase;
   color:var(--muted);margin-bottom:1rem;
 }
-.proj-title{
+.ps-title{
   font-family:'Space Grotesk',sans-serif;
-  font-size:clamp(1.5rem,3.5vw,2.8rem);
-  font-weight:700;letter-spacing:-.03em;
-  line-height:1;margin-bottom:1rem;
-  transition:color .3s;
+  font-size:clamp(1.8rem,4vw,3.2rem);
+  font-weight:700;letter-spacing:-.03em;line-height:1;
 }
-.project-row:hover .proj-title{color:var(--acid);}
-.proj-desc{
-  font-size:.88rem;line-height:1.65;
-  color:rgba(242,239,228,.5);
-  max-width:480px;
-}
-.proj-meta{
-  padding:2.5rem 2vw;
-  display:flex;flex-direction:column;justify-content:space-between;
-}
-.proj-tech-list{
-  display:flex;flex-direction:column;gap:.4rem;
-}
-.proj-tech-item{
-  font-family:'DM Mono',monospace;font-size:.7rem;
-  color:var(--muted);padding:.3rem 0;
-  border-bottom:1px solid var(--rule-light);
-  display:flex;justify-content:space-between;
-  align-items:center;
-}
-.proj-tech-item::after{content:'—';color:rgba(242,239,228,.1);}
-.proj-arrow-wrap{
-  display:flex;align-items:center;gap:.5rem;
+.ps-status{
   font-family:'DM Mono',monospace;font-size:.65rem;
-  color:var(--muted);letter-spacing:.1em;text-transform:uppercase;
-  transition:color .3s;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--acid);
+  display:flex;align-items:center;gap:.55rem;
+  padding-top:.5rem;text-align:right;
 }
-.project-row:hover .proj-arrow-wrap{color:var(--acid);}
-.proj-arrow-circle{
-  width:36px;height:36px;border:1px solid currentColor;
-  border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:.9rem;
-  transition:all .3s;
+.ps-status::before{
+  content:'';width:7px;height:7px;border-radius:50%;
+  background:var(--acid);box-shadow:0 0 8px rgba(202,255,0,.6);
+  flex-shrink:0;
 }
-.project-row:hover .proj-arrow-circle{
-  background:var(--acid);border-color:var(--acid);color:var(--ink);
+.ps-status.private{color:var(--muted);}
+.ps-status.private::before{background:var(--muted);box-shadow:none;}
+
+.ps-body{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
 }
+.ps-desc-col{
+  padding:2.5rem 3vw;
+  border-right:1px solid var(--rule-light);
+}
+.ps-desc{
+  font-size:.95rem;line-height:1.75;
+  color:rgba(242,239,228,.55);
+  margin-bottom:1.75rem;
+}
+.ps-desc strong{color:var(--paper);font-weight:500;}
+.ps-result{
+  border-top:2px solid var(--acid);
+  padding-top:1.25rem;
+  font-family:'DM Mono',monospace;font-size:.78rem;
+  line-height:1.7;color:var(--paper);
+}
+.ps-result .lbl{
+  display:block;font-size:.6rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;
+}
+
+.ps-side{
+  padding:2.5rem 2.5vw;
+  display:flex;flex-direction:column;gap:2rem;
+}
+.ps-side-label{
+  font-family:'DM Mono',monospace;font-size:.6rem;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1rem;
+}
+.ps-features{list-style:none;display:flex;flex-direction:column;}
+.ps-features li{
+  font-size:.85rem;line-height:1.5;
+  color:rgba(242,239,228,.6);
+  padding:.55rem 0;
+  border-bottom:1px solid var(--rule-light);
+  display:flex;gap:.65rem;
+}
+.ps-features li:last-child{border-bottom:none;}
+.ps-features li::before{content:'◆';color:var(--acid);font-size:.5rem;line-height:2;flex-shrink:0;}
+.ps-stack{display:flex;flex-wrap:wrap;gap:.4rem;}
+.ps-links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:auto;}
+.ps-links .btn-press{padding:.55rem 1.1rem;font-size:.68rem;}
 
 /* ══ PROCESS ══ */
 #process{
@@ -827,8 +858,11 @@ footer{
   .hero-top{grid-template-columns:1fr;}
   .hero-meta{border-right:none;padding-right:0;border-bottom:1px solid var(--rule-light);padding-bottom:2rem;margin-bottom:2rem;}
   .hero-index{font-size:8rem;}
-  .proj-body{grid-template-columns:1fr;}
-  .proj-meta{border-top:1px solid var(--rule-light);}
+  .project-section{grid-template-columns:1fr;}
+  .ps-num{writing-mode:horizontal-tb;border-right:none;border-bottom:1px solid var(--rule-light);justify-content:flex-start;align-items:center;padding:.9rem 3vw;}
+  .ps-body{grid-template-columns:1fr;}
+  .ps-desc-col{border-right:none;border-bottom:1px solid var(--rule-light);}
+  .ps-status{text-align:left;}
   nav .nav-center{display:none;}
   #back-to-top{bottom:16px;right:16px;width:36px;height:36px;font-size:1rem;}
 }
@@ -1023,7 +1057,7 @@ footer{
   </div>
 </section>
 
-<!-- WORK — REAL PROJECTS WITH MAGNETIC HOVER -->
+<!-- WORK — FULL PROJECT SECTIONS -->
 <section id="work" aria-label="Selected projects">
   <div class="work-header">
     <div>
@@ -1033,171 +1067,242 @@ footer{
     <a href="https://github.com/AanandAB" target="_blank" rel="noopener" class="btn-press outline r">All on GitHub ↗</a>
   </div>
 
-  <a class="project-row r magnetic" href="https://aanandab.github.io/Destino-Travels/" target="_blank" rel="noopener">
-    <div class="proj-num" aria-hidden="true">01</div>
-    <div class="proj-body">
-      <div class="proj-content">
-        <div class="proj-type">// Business Website</div>
-        <h3 class="proj-title">Destino Travels</h3>
-        <p class="proj-desc">Full-service travel agency website with 15 service categories, Lenis smooth scroll, GSAP scroll-triggered animations, Framer Motion UI, and WhatsApp enquiry routing. Built for a Kerala-based agency serving international clients.</p>
-      </div>
-      <div class="proj-meta">
-        <div class="proj-tech-list">
-          <div class="proj-tech-item">Next.js 14</div>
-          <div class="proj-tech-item">TypeScript</div>
-          <div class="proj-tech-item">GSAP</div>
-          <div class="proj-tech-item">Framer Motion</div>
-          <div class="proj-tech-item">Tailwind CSS</div>
-        </div>
-        <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
-          View project
-        </div>
-      </div>
-    </div>
-  </a>
+  <nav class="work-nav" aria-label="Project index">
+    <a href="#proj-destino">01 · Destino</a>
+    <a href="#proj-aquarium">02 · Aquarium</a>
+    <a href="#proj-onapookkal">03 · Onapookkal</a>
+    <a href="#proj-mess">04 · Mess</a>
+    <a href="#proj-cafemaster">05 · CafeMaster</a>
+  </nav>
 
-  <a class="project-row r magnetic" href="https://aanandab.github.io/Portfolio/" target="_blank" rel="noopener">
-    <div class="proj-num" aria-hidden="true">02</div>
-    <div class="proj-body">
-      <div class="proj-content">
-        <div class="proj-type">// Creative Portfolio</div>
-        <h3 class="proj-title">3D Portfolio</h3>
-        <p class="proj-desc">Cinematic 3D developer portfolio with a Sketchfab floating-island model, 240-frame scroll-scrubbed flythrough, and an animated robot companion. React Three Fiber, GSAP ScrollTrigger, and Lenis smooth scroll. Deployed on GitHub Pages.</p>
-      </div>
-      <div class="proj-meta">
-        <div class="proj-tech-list">
-          <div class="proj-tech-item">React Three Fiber</div>
-          <div class="proj-tech-item">Three.js</div>
-          <div class="proj-tech-item">GSAP</div>
-          <div class="proj-tech-item">Lenis</div>
-          <div class="proj-tech-item">Sketchfab</div>
+  <!-- 01 · DESTINO TRAVELS -->
+  <article class="project-section r" id="proj-destino">
+    <div class="ps-num" aria-hidden="true">01</div>
+    <div class="ps-main">
+      <div class="ps-head">
+        <div class="ps-head-title">
+          <div class="ps-type">// Business Website</div>
+          <h3 class="ps-title">Destino Travels</h3>
         </div>
-        <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
-          View live site
+        <div class="ps-status">Live · Destino-Travels</div>
+      </div>
+      <div class="ps-body">
+        <div class="ps-desc-col">
+          <p class="ps-desc">Full-service travel agency website built for a Kerala-based agency serving international clients. An editorial, cinematic design that makes each destination feel immersive — smooth-scroll navigation and scroll-triggered reveals throughout, with <strong>15 service categories</strong> and WhatsApp enquiry routing so no lead ever slips through.</p>
+          <div class="ps-result"><span class="lbl">Result</span>Live at aanandab.github.io/Destino-Travels — a real agency site generating enquiries today.</div>
+        </div>
+        <div class="ps-side">
+          <div>
+            <div class="ps-side-label">What's inside</div>
+            <ul class="ps-features">
+              <li>15 service categories — tours, visas, holidays, ticketing and more</li>
+              <li>Lenis smooth scroll and GSAP scroll-triggered animations</li>
+              <li>Framer Motion UI transitions</li>
+              <li>WhatsApp enquiry routing on every package</li>
+              <li>Fully responsive, SEO-ready editorial layout</li>
+            </ul>
+          </div>
+          <div>
+            <div class="ps-side-label">Stack</div>
+            <div class="ps-stack">
+              <span class="stack-chip">Next.js 14</span>
+              <span class="stack-chip">TypeScript</span>
+              <span class="stack-chip">GSAP</span>
+              <span class="stack-chip">Framer Motion</span>
+              <span class="stack-chip">Tailwind CSS</span>
+            </div>
+          </div>
+          <div class="ps-links">
+            <a href="https://aanandab.github.io/Destino-Travels/" target="_blank" rel="noopener" class="btn-press filled">Live site ↗</a>
+          </div>
         </div>
       </div>
     </div>
-  </a>
+  </article>
 
-  <a class="project-row r magnetic" href="https://github.com/AanandAB/evently-connect-portal" target="_blank" rel="noopener">
-    <div class="proj-num" aria-hidden="true">03</div>
-    <div class="proj-body">
-      <div class="proj-content">
-        <div class="proj-type">// Business Website</div>
-        <h3 class="proj-title">Evently Connect</h3>
-        <p class="proj-desc">Event management company portal with service catalogue, enquiry system, and company profile. Clean, professional design built for a Kerala-based event management business to showcase their services and capture leads.</p>
-      </div>
-      <div class="proj-meta">
-        <div class="proj-tech-list">
-          <div class="proj-tech-item">React</div>
-          <div class="proj-tech-item">TypeScript</div>
-          <div class="proj-tech-item">Tailwind CSS</div>
-          <div class="proj-tech-item">Vite</div>
+  <!-- 02 · HAPPY AQUARIUM -->
+  <article class="project-section r" id="proj-aquarium">
+    <div class="ps-num" aria-hidden="true">02</div>
+    <div class="ps-main">
+      <div class="ps-head">
+        <div class="ps-head-title">
+          <div class="ps-type">// Full-Stack Web App + CMS</div>
+          <h3 class="ps-title">Happy Aquarium</h3>
         </div>
-        <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
-          View project
+        <div class="ps-status">Live · Kuthuparamba, Kerala</div>
+      </div>
+      <div class="ps-body">
+        <div class="ps-desc-col">
+          <p class="ps-desc">Premium storefront and a complete custom CMS for an aquarium and imported-fish store. A "nature-documentary" editorial design with a searchable <strong>live catalogue of 35+ fish species</strong>, rich care-attribute detail pages, and interactive tools. The <strong>/admin</strong> backend lets the owner run everything — stock, offers, enquiries and the homepage — from a browser, on a stack that costs nothing to host.</p>
+          <div class="ps-result"><span class="lbl">Result</span>Runs on Cloudflare Workers + D1 (OpenNext) — a real store live at ₹0/month hosting.</div>
+        </div>
+        <div class="ps-side">
+          <div>
+            <div class="ps-side-label">What's inside</div>
+            <ul class="ps-features">
+              <li>Live catalogue of 35+ fish species — search, filters and sorting</li>
+              <li>Interactive Fish Compatibility Checker and Aquarium Planner</li>
+              <li>Custom /admin CMS — signed-cookie auth, role hierarchy, 30+ field fish CRUD</li>
+              <li>Live-stats dashboard, low-stock alerts and enquiries inbox</li>
+              <li>Reorderable homepage builder and scheduled offers</li>
+              <li>WhatsApp reserve/call CTAs and live-countdown offers</li>
+            </ul>
+          </div>
+          <div>
+            <div class="ps-side-label">Stack</div>
+            <div class="ps-stack">
+              <span class="stack-chip">Next.js 16</span>
+              <span class="stack-chip">TypeScript</span>
+              <span class="stack-chip">Drizzle + D1</span>
+              <span class="stack-chip">Tailwind v4</span>
+              <span class="stack-chip">Cloudflare Workers</span>
+            </div>
+          </div>
+          <div class="ps-links">
+            <a href="https://github.com/AanandAB/aquarium" target="_blank" rel="noopener" class="btn-press outline">GitHub ↗</a>
+          </div>
         </div>
       </div>
     </div>
-  </a>
+  </article>
 
-  <a class="project-row r magnetic" href="https://github.com/AanandAB/Cafeflutter" target="_blank" rel="noopener">
-    <div class="proj-num" aria-hidden="true">04</div>
-    <div class="proj-body">
-      <div class="proj-content">
-        <div class="proj-type">// Desktop &amp; Mobile App</div>
-        <h3 class="proj-title">CafeMaster</h3>
-        <p class="proj-desc">Complete restaurant management system — POS, Kitchen Display, Table Management, Inventory, Supplier Management, Ledger, and Analytics. Multi-device sync over local WiFi with zero cloud dependency. Offline-first with Hive, role-based staff access, UPI QR payments, and thermal printer support. Built for Android tablets and Windows, shipped as a production-ready APK and EXE.</p>
-      </div>
-      <div class="proj-meta">
-        <div class="proj-tech-list">
-          <div class="proj-tech-item">Flutter 3.24</div>
-          <div class="proj-tech-item">Dart</div>
-          <div class="proj-tech-item">Riverpod</div>
-          <div class="proj-tech-item">Hive</div>
-          <div class="proj-tech-item">WebSocket</div>
+  <!-- 03 · ONAPOOKKAL -->
+  <article class="project-section r" id="proj-onapookkal">
+    <div class="ps-num" aria-hidden="true">03</div>
+    <div class="ps-main">
+      <div class="ps-head">
+        <div class="ps-head-title">
+          <div class="ps-type">// E-commerce Web App + CRM</div>
+          <h3 class="ps-title">Onapookkal · ഓണപ്പൂക്കൾ</h3>
         </div>
-        <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
-          View project
+        <div class="ps-status">Live · onapookkal.store</div>
+      </div>
+      <div class="ps-body">
+        <div class="ps-desc-col">
+          <p class="ps-desc">A seasonal Onam flower e-commerce site for a Kannur shop — <strong>bilingual (English + മലയാളം)</strong>, selling pookalam flowers, petal packs and daily pookalam kits with a live countdown to Thiruvonam. Distance-based delivery, flexible payments and a full admin CRM with profit-and-loss and a Leaflet delivery map.</p>
+          <div class="ps-result"><span class="lbl">Result</span>Live at onapookkal.store — shipping orders for Onam 2026.</div>
+        </div>
+        <div class="ps-side">
+          <div>
+            <div class="ps-side-label">What's inside</div>
+            <ul class="ps-features">
+              <li>Bilingual storefront with English / Malayalam toggle</li>
+              <li>Distance-based delivery charges and live Thiruvonam countdown</li>
+              <li>Razorpay / COD / WhatsApp payment flows and a coupon engine</li>
+              <li>Order tracking with printable PDF receipt</li>
+              <li>Admin CRM — products, orders, coupons, delivery map and profit-and-loss</li>
+            </ul>
+          </div>
+          <div>
+            <div class="ps-side-label">Stack</div>
+            <div class="ps-stack">
+              <span class="stack-chip">Next.js 16</span>
+              <span class="stack-chip">TypeScript</span>
+              <span class="stack-chip">Cloudflare Workers</span>
+              <span class="stack-chip">Drizzle + D1</span>
+              <span class="stack-chip">GSAP + Lenis</span>
+            </div>
+          </div>
+          <div class="ps-links">
+            <a href="https://onapookkal.store" target="_blank" rel="noopener" class="btn-press filled">Live site ↗</a>
+            <a href="https://github.com/AanandAB/Onapoo" target="_blank" rel="noopener" class="btn-press outline">GitHub ↗</a>
+          </div>
         </div>
       </div>
     </div>
-  </a>
+  </article>
 
-  <a class="project-row r magnetic" href="https://github.com/AanandAB/Sudoku_Flutter" target="_blank" rel="noopener">
-    <div class="proj-num" aria-hidden="true">05</div>
-    <div class="proj-body">
-      <div class="proj-content">
-        <div class="proj-type">// Mobile Game</div>
-        <h3 class="proj-title">Sudoku — 300 Levels</h3>
-        <p class="proj-desc">Fully custom Sudoku game with 300 procedurally generated puzzles across three difficulties. Custom neumorphic design system with dual-shadow widgets, animated logo, confetti celebrations, star rating, hint system, undo/notes, and sequential level unlocking. Zero third-party Sudoku libraries — engine, generator, and solver all built from scratch.</p>
-      </div>
-      <div class="proj-meta">
-        <div class="proj-tech-list">
-          <div class="proj-tech-item">Flutter 3.24</div>
-          <div class="proj-tech-item">Dart</div>
-          <div class="proj-tech-item">GoRouter</div>
-          <div class="proj-tech-item">Neumorphic UI</div>
+  <!-- 04 · MESS MANAGEMENT -->
+  <article class="project-section r" id="proj-mess">
+    <div class="ps-num" aria-hidden="true">04</div>
+    <div class="ps-main">
+      <div class="ps-head">
+        <div class="ps-head-title">
+          <div class="ps-type">// Windows Desktop App</div>
+          <h3 class="ps-title">Mess Management · JAH Mess</h3>
         </div>
-        <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
-          View project
+        <div class="ps-status private">Private client · UAE</div>
+      </div>
+      <div class="ps-body">
+        <div class="ps-desc-col">
+          <p class="ps-desc">A custom offline-first Windows desktop app for a UAE mess (meal-subscription) business. Tracks customers, categories, dues and advance, with <strong>pro-rated monthly billing</strong>, finance logs, inventory and CSV report exports — all in a polished neumorphic UI, stored in local SQLite with zero cloud cost. Ships as a signed, machine-locked installer with automatic backups.</p>
+          <div class="ps-result"><span class="lbl">Result</span>Delivered as a signed .exe installer to a UAE client — a 7,000 AED contract, fully offline with no recurring hosting fees.</div>
+        </div>
+        <div class="ps-side">
+          <div>
+            <div class="ps-side-label">What's inside</div>
+            <ul class="ps-features">
+              <li>Dashboard with live stats, charts and recent payments</li>
+              <li>Customer management — profiles, dues, advance and active/inactive status</li>
+              <li>Mess subscriptions with pro-rated billing (full-month vs per-day)</li>
+              <li>Income/expense finance module and monthly CSV report exports</li>
+              <li>Inventory control, camera photo capture and auto-backup</li>
+              <li>Offline machine-locked licensing (SHA-256) and Inno Setup installer</li>
+            </ul>
+          </div>
+          <div>
+            <div class="ps-side-label">Stack</div>
+            <div class="ps-stack">
+              <span class="stack-chip">Flutter</span>
+              <span class="stack-chip">Dart</span>
+              <span class="stack-chip">SQLite (sqflite_ffi)</span>
+              <span class="stack-chip">fl_chart</span>
+              <span class="stack-chip">Inno Setup</span>
+            </div>
+          </div>
+          <div class="ps-links">
+            <span class="btn-press outline" style="pointer-events:none;border-color:rgba(242,239,228,.12);color:var(--muted);">Private client project</span>
+          </div>
         </div>
       </div>
     </div>
-  </a>
+  </article>
 
-  <a class="project-row r magnetic" href="https://github.com/AanandAB/aquarium" target="_blank" rel="noopener">
-    <div class="proj-num" aria-hidden="true">06</div>
-    <div class="proj-body">
-      <div class="proj-content">
-        <div class="proj-type">// Full-Stack Web App + CMS</div>
-        <h3 class="proj-title">Happy Aquarium</h3>
-        <p class="proj-desc">Premium storefront and full custom CMS for an aquarium &amp; imported-fish store in Kuthuparamba, Kerala. Cinematic "nature-documentary" editorial design with GSAP scroll, mouse parallax and Lenis smooth scroll, a live catalogue of 35+ fish species with search, category/difficulty filters and sorting, rich care-attribute detail pages with galleries, plus interactive Fish Compatibility Checker and Aquarium Planner tools. WhatsApp reserve/call CTAs and live-countdown offers throughout. The custom /admin CMS ships signed-cookie auth with a role hierarchy, a live-stats dashboard, low-stock alerts, full fish CRUD (30+ fields), an enquiries inbox, a reorderable homepage builder, and scheduled offers. Cloudflare-native — runs on Workers via OpenNext with a D1 database, keeping a local store live at ₹0/month.</p>
-      </div>
-      <div class="proj-meta">
-        <div class="proj-tech-list">
-          <div class="proj-tech-item">Next.js 16</div>
-          <div class="proj-tech-item">TypeScript</div>
-          <div class="proj-tech-item">Drizzle + D1</div>
-          <div class="proj-tech-item">Tailwind v4</div>
-          <div class="proj-tech-item">Cloudflare Workers</div>
+  <!-- 05 · CAFEMASTER -->
+  <article class="project-section r" id="proj-cafemaster">
+    <div class="ps-num" aria-hidden="true">05</div>
+    <div class="ps-main">
+      <div class="ps-head">
+        <div class="ps-head-title">
+          <div class="ps-type">// Restaurant POS · Android + Windows</div>
+          <h3 class="ps-title">CafeMaster</h3>
         </div>
-        <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
-          View project
-        </div>
+        <div class="ps-status">Shipped · APK + EXE</div>
       </div>
-    </div>
-  </a>
-
-  <a class="project-row r magnetic" href="https://github.com/AanandAB/Onapoo" target="_blank" rel="noopener">
-    <div class="proj-num" aria-hidden="true">07</div>
-    <div class="proj-body">
-      <div class="proj-content">
-        <div class="proj-type">// E-commerce Web App + CRM</div>
-        <h3 class="proj-title">Onapookkal · ഓണപ്പൂക്കൾ</h3>
-        <p class="proj-desc">Seasonal e-commerce site for an Onam flower shop in Kannur — a bilingual (English + മലയാളം) storefront selling pookalam flowers, petal packs and daily pookalam kits, with a live countdown to Thiruvonam. Distance-based delivery charges, Razorpay / COD / WhatsApp payments, a coupon engine and order tracking. A full admin/CRM backend handles products, orders, coupons, a Leaflet delivery map, and profit &amp; loss. Live at onapookkal.store.</p>
-      </div>
-      <div class="proj-meta">
-        <div class="proj-tech-list">
-          <div class="proj-tech-item">Next.js 16</div>
-          <div class="proj-tech-item">TypeScript</div>
-          <div class="proj-tech-item">Cloudflare Workers</div>
-          <div class="proj-tech-item">Drizzle + D1</div>
-          <div class="proj-tech-item">GSAP + Lenis</div>
+      <div class="ps-body">
+        <div class="ps-desc-col">
+          <p class="ps-desc">A complete restaurant management system — POS, kitchen display, table management, inventory, supplier ledger and analytics — that syncs across devices over local WiFi with zero cloud dependency. <strong>Offline-first</strong> so a lost connection never stops service, with role-based staff access, UPI QR payments and thermal printer support.</p>
+          <div class="ps-result"><span class="lbl">Result</span>Shipped as production-ready APK (Android tablets) and EXE (Windows) for a working restaurant.</div>
         </div>
-        <div class="proj-arrow-wrap">
-          <div class="proj-arrow-circle" aria-hidden="true">↗</div>
-          View project
+        <div class="ps-side">
+          <div>
+            <div class="ps-side-label">What's inside</div>
+            <ul class="ps-features">
+              <li>Point-of-sale, kitchen display and table management</li>
+              <li>Multi-device sync over local WiFi (WebSocket) — zero cloud cost</li>
+              <li>Offline-first (Hive) with role-based staff access</li>
+              <li>Inventory, supplier management and ledger</li>
+              <li>UPI QR payments and thermal printer support</li>
+              <li>Analytics dashboard</li>
+            </ul>
+          </div>
+          <div>
+            <div class="ps-side-label">Stack</div>
+            <div class="ps-stack">
+              <span class="stack-chip">Flutter 3.24</span>
+              <span class="stack-chip">Dart</span>
+              <span class="stack-chip">Riverpod</span>
+              <span class="stack-chip">Hive</span>
+              <span class="stack-chip">WebSocket</span>
+            </div>
+          </div>
+          <div class="ps-links">
+            <a href="https://github.com/AanandAB/Cafeflutter" target="_blank" rel="noopener" class="btn-press outline">GitHub ↗</a>
+          </div>
         </div>
       </div>
     </div>
-  </a>
+  </article>
 </section>
 
 <!-- PROCESS -->
@@ -1317,7 +1422,7 @@ document.addEventListener('mousemove', e => {
   cur.style.left = e.clientX + 'px';
   cur.style.top  = e.clientY + 'px';
 });
-document.querySelectorAll('a,button,.service-card,.project-row').forEach(el => {
+document.querySelectorAll('a,button,.service-card').forEach(el => {
   el.addEventListener('mouseenter', () => cur.classList.add('grow'));
   el.addEventListener('mouseleave', () => cur.classList.remove('grow'));
 });
@@ -1442,23 +1547,8 @@ backBtn.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ── MAGNETIC HOVER ON PROJECT ROWS ──
-document.querySelectorAll('.project-row.magnetic').forEach(row => {
-  row.addEventListener('mousemove', e => {
-    const rect = row.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    // Subtle tilt — max 4px shift
-    const tx = x * 0.015;
-    const ty = y * 0.02;
-    row.style.transform = `translate(${tx}px, ${ty}px)`;
-    row.style.transition = 'transform .15s ease-out, background .4s';
-  });
-  row.addEventListener('mouseleave', () => {
-    row.style.transform = 'translate(0, 0)';
-    row.style.transition = 'transform .4s cubic-bezier(.23,1,.32,1), background .4s';
-  });
-});
+// ── MAGNETIC HOVER ON PROJECT ROWS (removed — sections replaced rows) ──
+
 </script>
 </body>
 </html>
