@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
 </head>
 <body>
 
@@ -37,9 +38,15 @@
   <a class="pd-back" href="index.html#work">← All projects</a>
 
   <header class="pd-hero">
-    <div class="pd-type">// Full-Stack Web App + CMS</div>
-    <h1 class="pd-title">Happy Aquarium</h1>
-    <div class="pd-status">Live · Kuthuparamba, Kerala</div>
+    <div class="pd-num" data-parallax="-0.18" aria-hidden="true">02</div>
+    <div class="pd-shape pd-shape-a" data-parallax="0.25" aria-hidden="true"></div>
+    <div class="pd-shape pd-shape-b" data-parallax="-0.12" aria-hidden="true"></div>
+    <div class="pd-shape pd-shape-c" data-parallax="0.16" aria-hidden="true"></div>
+    <div class="pd-hero-inner">
+      <div class="pd-type">// Full-Stack Web App + CMS</div>
+      <h1 class="pd-title" data-parallax="0.05">Happy Aquarium</h1>
+      <div class="pd-status">Live · Kuthuparamba, Kerala</div>
+    </div>
   </header>
 
   <div class="pd-grid">
@@ -48,15 +55,22 @@
       <div class="pd-result"><span class="lbl">Result</span>Runs on Cloudflare Workers + D1 (OpenNext) — a real store live at ₹0/month hosting.</div>
     </div>
     <aside class="pd-side">
-      <div>
-        <div class="pd-side-label">What's inside</div>
+      <div class="pd-feature-group">
+        <div class="pd-side-label">Storefront</div>
         <ul class="pd-features">
           <li>Live catalogue of 35+ fish species — search, filters and sorting</li>
-          <li>Interactive Fish Compatibility Checker and Aquarium Planner</li>
-          <li>Custom /admin CMS — signed-cookie auth, role hierarchy, 30+ field fish CRUD</li>
-          <li>Live-stats dashboard, low-stock alerts and enquiries inbox</li>
-          <li>Reorderable homepage builder and scheduled offers</li>
+          <li>Rich care-attribute detail pages with galleries</li>
+          <li>Fish Compatibility Checker and Aquarium Planner tools</li>
           <li>WhatsApp reserve/call CTAs and live-countdown offers</li>
+        </ul>
+      </div>
+      <div class="pd-feature-group">
+        <div class="pd-side-label">Admin CMS</div>
+        <ul class="pd-features">
+          <li>Signed-cookie auth with a role hierarchy</li>
+          <li>Full fish CRUD (30+ fields) and low-stock alerts</li>
+          <li>Live-stats dashboard and enquiries inbox</li>
+          <li>Reorderable homepage builder and scheduled offers</li>
         </ul>
       </div>
       <div>
@@ -65,11 +79,19 @@
           <span class="stack-chip">Next.js 16</span> <span class="stack-chip">TypeScript</span> <span class="stack-chip">Drizzle + D1</span> <span class="stack-chip">Tailwind v4</span> <span class="stack-chip">Cloudflare Workers</span>
         </div>
       </div>
-      <div class="pd-links">
-<a href="https://github.com/AanandAB/aquarium" target="_blank" rel="noopener" class="btn-press outline">GitHub ↗</a>
-      </div>
+      <div class="pd-links"><a href="https://github.com/AanandAB/aquarium" target="_blank" rel="noopener" class="btn-press outline">GitHub ↗</a></div>
     </aside>
   </div>
+
+  <section class="pd-similar r">
+    <div class="section-flag">Want something similar?</div>
+    <h2>Need <em>a storefront + CMS</em> for your business?</h2>
+    <p>I build custom versions of everything in this portfolio — tailored to your business, your customers and your budget. Share your idea and I'll scope it, price it and ship it.</p>
+    <div class="pd-similar-cta">
+      <a href="index.html#contact" class="btn-press filled">Start a similar project →</a>
+      <span class="send-note">Free consultation · reply within 24h</span>
+    </div>
+  </section>
 
   <nav class="pd-next" aria-label="More projects">
     <a href="destino-travels.html">← Destino Travels</a>

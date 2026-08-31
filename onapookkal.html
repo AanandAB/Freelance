@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
 </head>
 <body>
 
@@ -37,9 +38,15 @@
   <a class="pd-back" href="index.html#work">← All projects</a>
 
   <header class="pd-hero">
-    <div class="pd-type">// E-commerce Web App + CRM</div>
-    <h1 class="pd-title">Onapookkal · ഓണപ്പൂക്കൾ</h1>
-    <div class="pd-status">Live · onapookkal.store</div>
+    <div class="pd-num" data-parallax="-0.18" aria-hidden="true">03</div>
+    <div class="pd-shape pd-shape-a" data-parallax="0.25" aria-hidden="true"></div>
+    <div class="pd-shape pd-shape-b" data-parallax="-0.12" aria-hidden="true"></div>
+    <div class="pd-shape pd-shape-c" data-parallax="0.16" aria-hidden="true"></div>
+    <div class="pd-hero-inner">
+      <div class="pd-type">// E-commerce Web App + CRM</div>
+      <h1 class="pd-title" data-parallax="0.05">Onapookkal · ഓണപ്പൂക്കൾ</h1>
+      <div class="pd-status">Live · onapookkal.store</div>
+    </div>
   </header>
 
   <div class="pd-grid">
@@ -48,14 +55,21 @@
       <div class="pd-result"><span class="lbl">Result</span>Live at onapookkal.store — shipping orders for Onam 2026.</div>
     </div>
     <aside class="pd-side">
-      <div>
-        <div class="pd-side-label">What's inside</div>
+      <div class="pd-feature-group">
+        <div class="pd-side-label">Storefront</div>
         <ul class="pd-features">
-          <li>Bilingual storefront with English / Malayalam toggle</li>
+          <li>Bilingual English / Malayalam toggle</li>
           <li>Distance-based delivery charges and live Thiruvonam countdown</li>
-          <li>Razorpay / COD / WhatsApp payment flows and a coupon engine</li>
+          <li>Razorpay / COD / WhatsApp payments and a coupon engine</li>
           <li>Order tracking with printable PDF receipt</li>
-          <li>Admin CRM — products, orders, coupons, delivery map and profit-and-loss</li>
+        </ul>
+      </div>
+      <div class="pd-feature-group">
+        <div class="pd-side-label">Admin CRM</div>
+        <ul class="pd-features">
+          <li>Product, order and coupon management</li>
+          <li>Leaflet delivery map with live pins</li>
+          <li>Profit-and-loss reporting</li>
         </ul>
       </div>
       <div>
@@ -64,11 +78,19 @@
           <span class="stack-chip">Next.js 16</span> <span class="stack-chip">TypeScript</span> <span class="stack-chip">Cloudflare Workers</span> <span class="stack-chip">Drizzle + D1</span> <span class="stack-chip">GSAP + Lenis</span>
         </div>
       </div>
-      <div class="pd-links">
-<a href="https://onapookkal.store" target="_blank" rel="noopener" class="btn-press filled">Live site ↗</a><a href="https://github.com/AanandAB/Onapoo" target="_blank" rel="noopener" class="btn-press outline">GitHub ↗</a>
-      </div>
+      <div class="pd-links"><a href="https://onapookkal.store" target="_blank" rel="noopener" class="btn-press filled">Live site ↗</a> <a href="https://github.com/AanandAB/Onapoo" target="_blank" rel="noopener" class="btn-press outline">GitHub ↗</a></div>
     </aside>
   </div>
+
+  <section class="pd-similar r">
+    <div class="section-flag">Want something similar?</div>
+    <h2>Need <em>an e-commerce store</em> for your business?</h2>
+    <p>I build custom versions of everything in this portfolio — tailored to your business, your customers and your budget. Share your idea and I'll scope it, price it and ship it.</p>
+    <div class="pd-similar-cta">
+      <a href="index.html#contact" class="btn-press filled">Start a similar project →</a>
+      <span class="send-note">Free consultation · reply within 24h</span>
+    </div>
+  </section>
 
   <nav class="pd-next" aria-label="More projects">
     <a href="happy-aquarium.html">← Happy Aquarium</a>

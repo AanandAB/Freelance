@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
 </head>
 <body>
 
@@ -37,9 +38,15 @@
   <a class="pd-back" href="index.html#work">← All projects</a>
 
   <header class="pd-hero">
-    <div class="pd-type">// Restaurant POS · Android + Windows</div>
-    <h1 class="pd-title">CafeMaster</h1>
-    <div class="pd-status">Shipped · APK + EXE</div>
+    <div class="pd-num" data-parallax="-0.18" aria-hidden="true">05</div>
+    <div class="pd-shape pd-shape-a" data-parallax="0.25" aria-hidden="true"></div>
+    <div class="pd-shape pd-shape-b" data-parallax="-0.12" aria-hidden="true"></div>
+    <div class="pd-shape pd-shape-c" data-parallax="0.16" aria-hidden="true"></div>
+    <div class="pd-hero-inner">
+      <div class="pd-type">// Restaurant POS · Android + Windows</div>
+      <h1 class="pd-title" data-parallax="0.05">CafeMaster</h1>
+      <div class="pd-status">Shipped · APK + EXE</div>
+    </div>
   </header>
 
   <div class="pd-grid">
@@ -48,15 +55,26 @@
       <div class="pd-result"><span class="lbl">Result</span>Shipped as production-ready APK (Android tablets) and EXE (Windows) for a working restaurant.</div>
     </div>
     <aside class="pd-side">
-      <div>
-        <div class="pd-side-label">What's inside</div>
+      <div class="pd-feature-group">
+        <div class="pd-side-label">Point of Sale</div>
         <ul class="pd-features">
-          <li>Point-of-sale, kitchen display and table management</li>
-          <li>Multi-device sync over local WiFi (WebSocket) — zero cloud cost</li>
-          <li>Offline-first (Hive) with role-based staff access</li>
-          <li>Inventory, supplier management and ledger</li>
+          <li>POS, kitchen display and table management</li>
           <li>UPI QR payments and thermal printer support</li>
+        </ul>
+      </div>
+      <div class="pd-feature-group">
+        <div class="pd-side-label">Operations</div>
+        <ul class="pd-features">
+          <li>Inventory, supplier management and ledger</li>
           <li>Analytics dashboard</li>
+          <li>Role-based staff access</li>
+        </ul>
+      </div>
+      <div class="pd-feature-group">
+        <div class="pd-side-label">Platform</div>
+        <ul class="pd-features">
+          <li>Multi-device sync over local WiFi (WebSocket)</li>
+          <li>Offline-first (Hive) — works without internet</li>
         </ul>
       </div>
       <div>
@@ -68,6 +86,16 @@
 
     </aside>
   </div>
+
+  <section class="pd-similar r">
+    <div class="section-flag">Want something similar?</div>
+    <h2>Need <em>a restaurant POS</em> for your business?</h2>
+    <p>I build custom versions of everything in this portfolio — tailored to your business, your customers and your budget. Share your idea and I'll scope it, price it and ship it.</p>
+    <div class="pd-similar-cta">
+      <a href="index.html#contact" class="btn-press filled">Start a similar project →</a>
+      <span class="send-note">Free consultation · reply within 24h</span>
+    </div>
+  </section>
 
   <nav class="pd-next" aria-label="More projects">
     <a href="mess-management.html">← Mess Management · JAH Mess</a>

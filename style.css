@@ -767,3 +767,51 @@ footer{
 @media(hover:none){
   #cur{display:none;}body{cursor:auto;}
 }
+
+/* ══ PROJECT DETAIL — PARALLAX HERO ══ */
+.pd-hero{position:relative;overflow:hidden;border-bottom:1px solid var(--rule-light);padding-bottom:2.5rem;}
+.pd-hero-inner{position:relative;z-index:1;}
+.pd-num{
+  position:absolute;top:-0.06em;right:-0.04em;z-index:0;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(9rem,24vw,20rem);
+  font-weight:700;line-height:1;letter-spacing:-.04em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(242,239,228,.08);
+  user-select:none;pointer-events:none;
+  will-change:transform;
+}
+.pd-shape{position:absolute;border-radius:50%;pointer-events:none;will-change:transform;z-index:0;}
+.pd-shape-a{width:130px;height:130px;border:1px solid rgba(202,255,0,.22);top:8%;left:-50px;}
+.pd-shape-b{width:56px;height:56px;background:rgba(202,255,0,.14);top:30%;right:22%;}
+.pd-shape-c{width:200px;height:200px;border:1px solid rgba(202,255,0,.1);bottom:-110px;left:24%;}
+[data-parallax]{will-change:transform;}
+
+/* ══ PROJECT DETAIL — FEATURE GROUPS ══ */
+.pd-feature-group .pd-side-label{margin-bottom:.9rem;color:var(--acid);}
+.pd-feature-group{margin-top:.4rem;}
+
+/* ══ PROJECT DETAIL — "WANT SOMETHING SIMILAR?" BAND ══ */
+.pd-similar{
+  margin-top:4rem;
+  border:1px solid var(--rule-light);
+  background:var(--ink2);
+  padding:3rem 3vw;
+  display:flex;flex-direction:column;gap:1.4rem;
+  position:relative;overflow:hidden;
+}
+.pd-similar h2{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(1.8rem,4vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.05;
+}
+.pd-similar h2 em{font-style:normal;color:var(--acid);}
+.pd-similar p{font-size:.95rem;line-height:1.7;color:rgba(242,239,228,.55);max-width:620px;}
+.pd-similar-cta{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;margin-top:.5rem;}
+.pd-similar-cta .send-note{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--muted);letter-spacing:.06em;}
+
+/* parallax hero — mobile */
+@media(max-width:900px){
+  .pd-num{font-size:9rem;right:-0.02em;}
+  .pd-shape-a{width:90px;height:90px;left:-40px;}
+  .pd-shape-c{width:140px;height:140px;}
+}
